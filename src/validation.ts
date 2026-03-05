@@ -75,10 +75,6 @@ const app = new Elysia()
     }
   )
 
-  // =========================
-  // PRAKTIKUM 2
-  // PARAMS + QUERY
-  // =========================
   .get(
     "/products/:id",
     ({ params, query }) => {
@@ -106,9 +102,6 @@ const app = new Elysia()
     }
   )
 
-  // =========================
-  // VALIDASI REQUEST BODY
-  // =========================
   .post(
     "/request",
     ({ body }) => {
@@ -168,6 +161,17 @@ const app = new Elysia()
       })
     }
   )
+  .get("/stats", () => {
+    return {
+      total: 150,
+      active: 75
+    };
+  }, {
+    response: t.Object({
+      total: t.Number(), 
+      active: t.Number() 
+    })
+  })
   .listen(3000);
  
 
