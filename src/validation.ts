@@ -134,10 +134,6 @@ const app = new Elysia()
     }
   )
 
-  // =========================
-  // PRAKTIKUM 3
-  // VALIDASI RESPONSE
-  // =========================
   .get(
     "/stats",
     () => {
@@ -154,6 +150,25 @@ const app = new Elysia()
     }
   )
   app.get('/', () => 'Hello World!')
+  .get(
+    "/products/:id",
+    ({ params, query }) => {
+      return {
+        message: "Berhasil mengambil produk",
+        id: params.id,
+        sort: query.sort || "Tidak ada sorting"
+      };
+    },
+    {
+      params: t.Object({
+        id: t.Numeric() 
+      }),
+      query: t.Object({
+        sort: t.Optional(t.Union([t.Literal("asc"), t.Literal("desc")]))
+      })
+    }
+  )
   .listen(3000);
+ 
 
 console.log("🦊 Elysia running at http://localhost:3000");
