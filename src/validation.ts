@@ -143,6 +143,19 @@ const app = new Elysia()
     }
   )
   app.get('/', () => 'Hello World!')
+
+  .onAfterHandle(({ response }) => {
+    return {
+      success: true,
+      Message: "data tersedia",
+      data: response
+    };
+  })
+  
+  .get("/product", () => {
+    return { id: 1, name: "Laptop" };
+  })
+
   .get(
     "/products/:id",
     ({ params, query }) => {
